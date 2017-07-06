@@ -25,7 +25,7 @@
 ## 初始化 建议在Application里初始化
 fastokhttp初始化时分两种情况
 
-### 一般初始化
+### 一般初始化(推荐)
 直接初始化后，一切采用默认设置。
 ```java
 FastOkHttpManager.init(Context context, File cachedDir, boolean debug);
@@ -34,7 +34,7 @@ FastOkHttpManager.init(Context context, File cachedDir, boolean debug);
 ### 高级初始化
 ```java
 private void initOKHttpConfig () {
-		Map<String, String> commonParamMap = new HashMap<String, String>();
+	Map<String, String> commonParamMap = new HashMap<String, String>();
         Map<String, String> commonHeaderMap = new HashMap<String, String>();
 
         OkHttpManager okHttpManager = new OkHttpManager.Builder()
@@ -67,9 +67,9 @@ FastOkHttpManager.doGet(xxxxxxxxxxxxx);或者 FastOkHttpManager.doRequest(xxxxxx
 
 //第二种方式
 OkHttpTask okHttpTask = new OkHttpTask();
-    	okHttpTask.setUrl(url);
-    	okHttpTask.setCachePolicyMode(CachePolicyMode.POLICY_CACHED_AND_NETWORK);
-    	okHttpTask.doGet(new INetCallback<String>(){
+    	   okHttpTask.setUrl(url);
+    	   okHttpTask.setCachePolicyMode(CachePolicyMode.POLICY_CACHED_AND_NETWORK);
+    	   okHttpTask.doGet(new INetCallback<String>(){
 
 			@Override
 			public void onSuccess(ResponseDataWrapper response, String t) {
