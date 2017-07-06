@@ -1,2 +1,122 @@
 # fastokhttp
-快速、便捷的okhttp
+快速、便捷的okhttp -基于okhttp-3.8.1.jar、okio-1.13.0.jar深度封装的网络请求框架
+
+----
+
+## 框架特性
+* GET、POST、PUT、PATCH、HEAD、DELETE等请求协议
+* 多文件上传，支持大文件上传，表单提交数据
+* 文件上传下载的进度回调、错误回调
+* 支持Json的提交
+* 完美的Http缓存模式，（1.只读网络；2.只读缓存；3.先读网络，网络没有则读缓存； 
+             4.先读缓存，不管是否有缓存数据，都会再读网络然后响应调用端《推荐》）；
+* Https、自签名网站Https的访问、支持双向验证
+* 失败重试机制，支持请求优先级
+* 异步模块用队列线程池平均分配多线程的资源，支持多个请求并发
+* 支持异步取消
+
+## 使用方法
+### Gradle
+暂不支持Gradle
+
+### Eclipse ADT
+自行下载上方jar包
+
+## 初始化 建议在Application里初始化
+fastokhttp初始化时分两种情况
+
+### 一般初始化
+直接初始化后，一切采用默认设置。
+```java
+FastOkHttpManager.init(Context context, File cachedDir, boolean debug);
+```
+
+### 高级初始化
+```java
+private void initOKHttpConfig () {
+		Map<String, String> commonParamMap = new HashMap<String, String>();
+        Map<String, String> commonHeaderMap = new HashMap<String, String>();
+
+        OkHttpManager okHttpManager = new OkHttpManager.Builder()
+                .setCommenParams(commonParamMap)
+                .setCommenHeader(commonHeaderMap)
+                .setTimeout(Constants.REQ_TIMEOUT)
+                .setDebug(false)
+                .cachedDir(new File(getCacheDir(), "_data"))//缓存目录 (必须的配置)
+                //.setCertificates(...)
+                //.setHostnameVerifier(new SkirtHttpsHostnameVerifier())
+
+        .build();
+        okHttpManager.init();
+	}
+```
+
+## 需要的权限
+```xml
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+```
+
+## 调用请求 
+```java
+//第一种方式
+FastOkHttpManager.doGet(xxxxxxxxxxxxx);或者 FastOkHttpManager.doRequest(xxxxxxxxxxxxx);
+
+//第二种方式
+OkHttpTask okHttpTask = new OkHttpTask();
+    	okHttpTask.setUrl(url);
+    	okHttpTask.setCachePolicyMode(CachePolicyMode.POLICY_CACHED_AND_NETWORK);
+    	okHttpTask.doGet(new INetCallback<String>(){
+
+			@Override
+			public void onSuccess(ResponseDataWrapper response, String t) {
+				super.onSuccess(response, t);
+				dataStr += "\n\n onSuccess isCacheData="+response.isCacheData()+" > datas:"+t ;
+				data.setText(dataStr);
+			}
+
+			@Override
+			public void onFailure(int errorCode, String msg) {
+				super.onFailure(errorCode, msg);
+				dataStr += "\n\n onFailure:"+msg ;
+				data.setText(dataStr);
+			}
+    		
+    	});
+...
+// 取消请求
+okHttpTask.cancel(true);
+```
+
+## 代码混淆
+```text
+// fastokhttp
+-dontwarn com.superman.fastokhttp.**
+-keep class com.superman.fastokhttp.**{*;}
+
+// okhttp
+-dontwarn okhttp3.**
+-keep class okhttp3.** {*;} 
+-dontwarn okio.**
+-keep class okio.** {*;} 
+```
+
+## License
+```text
+Copyright 2017 Super
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
