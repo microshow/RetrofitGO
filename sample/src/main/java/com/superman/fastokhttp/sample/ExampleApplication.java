@@ -2,6 +2,8 @@ package com.superman.fastokhttp.sample;
 
 import android.app.Application;
 
+import com.superman.fastokhttp.FastOkHttpManager;
+
 //import com.squareup.leakcanary.LeakCanary;
 
 public class ExampleApplication extends Application {
@@ -13,5 +15,7 @@ public class ExampleApplication extends Application {
 //            return;
 //        }
 //        LeakCanary.install(this);
+        //初始化fastokhttp
+        FastOkHttpManager.init(getApplicationContext(), null, BuildConfig.DEBUG);
     }
 }
