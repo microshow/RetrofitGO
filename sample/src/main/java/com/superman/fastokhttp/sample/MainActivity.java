@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplication(),"hello",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(),"helloworld",Toast.LENGTH_SHORT).show();
             }
         });
     }
