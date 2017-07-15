@@ -459,7 +459,10 @@ public class OkHttpTask {
 					return;
 				}
 			} catch (Exception e) {
-				Log.e(TAG, e.getMessage());
+				if (Constants.DEBUG) {
+					Log.e(TAG, e!=null ? e.getMessage() : "gson parse exception");
+				}
+				checkCacheMode (null, INetCallback.ERROR_RESPONSE_JSON_EXCEPTION, INetCallback.ERROR_RESPONSE_JSON_EXCEPTION_INFO);
 			}
 		}
 		checkCacheMode (null, INetCallback.ERROR_RESPONSE_JSON_EXCEPTION, INetCallback.ERROR_RESPONSE_JSON_EXCEPTION_INFO);
