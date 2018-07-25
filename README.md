@@ -16,7 +16,7 @@
 * 支持异步取消
 
 ## 使用方法
-### Gradle
+### Gradle方式
 后续支持Gradle
 
 ### jar包导入
