@@ -20,7 +20,7 @@
 后续支持Gradle
 
 ### jar包导入
-前往 https://github.com/microshow/fastokhttp/tree/master/jars 下载jar包
+[点击下载](/jars)
 
 ## 初始化 建议在Application里初始化
 fastokhttp初始化时分两种情况
