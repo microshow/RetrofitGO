@@ -1,13 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    compileSdkVersion compileSdkValue
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 22
-        versionCode 13
-        versionName '2.1.9'
+        minSdkVersion minSdkValue
+        targetSdkVersion targetSdkValue
+        versionCode versionCodeValue
+        versionName versionNameValue
     }
     buildTypes {
         release {
@@ -19,8 +18,31 @@ android {
     }
 }
 
-dependencies {
-    compile 'com.google.code.gson:gson:2.0'
-    compile files('libs/okhttp-3.8.1.jar')
-    compile files('libs/okio-1.13.0.jar')
+//修改jar名字+将指定jar生成的地方
+task makeJar(type:Copy){
+    //如果之前存在，则先删除
+    delete "build/libs/fastokhttp-v${rootProject.ext.versionNameValue}.jar"
+    //设置拷贝的文件
+    from('build/intermediates/packaged-classes/debug/')
+    //生成jar包后的文件目录位置
+    into('build/libs/')
+    //include,exclude参数来设置过滤
+    include('classes.jar')
+    //重命名
+    rename('classes.jar',"fastokhttp-v${rootProject.ext.versionNameValue}.jar")
 }
+
+makeJar.dependsOn(build)
+
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+
+    api 'com.google.code.gson:gson:2.8.5'
+
+    api 'com.squareup.okhttp3:okhttp:3.12.0'
+    api 'com.squareup.okio:okio:2.1.0'
+
+}
+
+

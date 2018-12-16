@@ -20,7 +20,13 @@
 后续支持Gradle
 
 ### jar包导入
-[点击下载](/jars)
+前往 https://github.com/microshow/fastokhttp/tree/master/versions 下载最新版本jar包
+
+添加okhttp版本：
+
+api 'com.squareup.okhttp3:okhttp:3.12.0'
+
+api 'com.squareup.okio:okio:2.1.0'
 
 ## 初始化 建议在Application里初始化
 fastokhttp初始化时分两种情况

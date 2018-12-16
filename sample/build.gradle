@@ -1,14 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    compileSdkVersion compileSdkValue
     defaultConfig {
         applicationId "com.superman.fastokhttp.sample"
-        minSdkVersion 15
-        targetSdkVersion 22
-        versionCode 13
-        versionName '2.1.9'
+        minSdkVersion minSdkValue
+        targetSdkVersion targetSdkValue
+        versionCode versionCodeValue
+        versionName versionNameValue
     }
     buildTypes {
         release {
@@ -17,16 +16,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_6
-        targetCompatibility JavaVersion.VERSION_1_6
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     productFlavors {
     }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.0.0'
-    compile project(':fastokhttp')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibValue}"
+
+    implementation project(':fastokhttp')
 }
