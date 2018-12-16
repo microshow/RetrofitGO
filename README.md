@@ -20,7 +20,7 @@
 后续支持Gradle
 
 ### jar包导入
-前往 https://github.com/microshow/fastokhttp/tree/master/versions 下载最新版本jar包
+[点击下载](/versions)
 
 添加okhttp版本：
 
