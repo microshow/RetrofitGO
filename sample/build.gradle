@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion compileSdkValue
     defaultConfig {
-        applicationId "com.superman.fastokhttp.sample"
+        applicationId "io.microshow.fastokhttp.sample"
         minSdkVersion minSdkValue
         targetSdkVersion targetSdkValue
         versionCode versionCodeValue
@@ -21,12 +21,19 @@ android {
     }
     productFlavors {
     }
+
+    dataBinding {
+        enabled = true
+    }
+
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibValue}"
+    implementation "android.arch.lifecycle:extensions:1.1.1"
 
     implementation project(':fastokhttp')
+    implementation project(':rxretrofit')
 }
