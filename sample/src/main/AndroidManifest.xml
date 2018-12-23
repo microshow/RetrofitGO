@@ -12,6 +12,7 @@
         android:label="@string/app_name"
         android:name=".App"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -22,6 +23,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".appbar.AppBarLayoutActivity"
+            android:label="@string/app_name"
+            android:theme="@style/SupportTheme">
+        </activity>
+
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package io.microshow.fastokhttp.sample;
+package io.microshow.fastokhttp.sample.viewmode;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
