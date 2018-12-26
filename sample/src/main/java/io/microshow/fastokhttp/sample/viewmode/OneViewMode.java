@@ -3,10 +3,20 @@ package io.microshow.fastokhttp.sample.viewmode;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.zchu.rxcache.RxCache;
+import com.zchu.rxcache.diskconverter.GsonDiskConverter;
+
+import java.io.File;
+
 import io.microshow.fastokhttp.FastOkHttpManager;
 import io.microshow.fastokhttp.callback.INetCallback;
 import io.microshow.fastokhttp.core.CachePolicyMode;
 import io.microshow.fastokhttp.core.ResponseDataWrapper;
+import io.microshow.fastokhttp.sample.ServerAPI;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Super on 2018/12/16.
