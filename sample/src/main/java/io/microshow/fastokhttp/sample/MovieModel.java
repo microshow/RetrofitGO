@@ -7,5 +7,8 @@ public class MovieModel {
 
     public String title;
 
+    public String authCode;
+
+
 
 }

@@ -19,14 +19,20 @@ import com.zchu.rxcache.diskconverter.GsonDiskConverter;
 import com.zchu.rxcache.stategy.CacheStrategy;
 import com.zchu.rxcache.stategy.IStrategy;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.io.File;
 
 import io.microshow.fastokhttp.sample.appbar.AppBarLayoutActivity;
 import io.microshow.fastokhttp.sample.databinding.ActivityMainBinding;
 import io.microshow.fastokhttp.sample.viewmode.OneViewMode;
+import io.reactivex.FlowableSubscriber;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.DisposableSubscriber;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -75,6 +81,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setDebug(true)
                 .build());
 
+    }
+
+    private void loadData () {
+        serverAPI.test("12133232esdsfdsfsf")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableSubscriber<BaseModel<MovieModel>>() {
+                    @Override
+                    public void onNext(BaseModel<MovieModel> movieModelBaseModel) {
+                        mBinding.result.setText(movieModelBaseModel.result.authCode);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        mBinding.result.setText(t.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+//                .subscribe(new Subscriber<BaseModel<MovieModel>>() {
+//                    @Override
+//                    public void onSubscribe(Subscription s) {
+//                        s.request(Long.MAX_VALUE);
+//                    }
+//
+//                    @Override
+//                    public void onNext(BaseModel<MovieModel> movieModelBaseModel) {
+//                        mBinding.result.setText(movieModelBaseModel.result.authCode);
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable t) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
     }
 
     private void loadData(IStrategy strategy) {
@@ -157,6 +206,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }else if (view.getId() == R.id.test3){
             loadData(CacheStrategy.firstRemote());
+//            loadData();
         }
     }
 
