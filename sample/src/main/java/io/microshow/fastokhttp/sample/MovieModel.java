@@ -1,14 +1,15 @@
 package io.microshow.fastokhttp.sample;
 
+import java.util.List;
+
 /**
- * Created by Super on 2018/12/26.
  */
 public class MovieModel {
 
-    public String title;
+    public List<CateGory> cateGoryList;
 
-    public String authCode;
-
-
+    public static class CateGory {
+        public String dict_value;
+    }
 
 }
