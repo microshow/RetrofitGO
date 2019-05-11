@@ -9,8 +9,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * 公共请求首部拦截器
- *
+ * 请求头拦截器
  */
 public abstract class RequestHeadersInterceptor implements Interceptor {
 

@@ -16,6 +16,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+/**
+ * 请求参数拦截器
+ */
 public abstract class RequestParamsInterceptor implements Interceptor {
 
     MediaType mediaType = MediaType.parse("text/plain; charset=utf-8");
