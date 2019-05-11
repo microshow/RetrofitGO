@@ -2,7 +2,7 @@ package io.microshow.rxretrofit.internal;
 
 /**
  */
-public class BaseResponse <T> {
+public class Response<T> {
 
     private int code;
     private String message;

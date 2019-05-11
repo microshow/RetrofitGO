@@ -4,14 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Protocol;
 import retrofit2.CallAdapter;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
@@ -109,12 +107,13 @@ public final class RetrofitClient {
     builder.retryOnConnectionFailure(true);
 
     // 只使用Http 1.1协议
-    builder.protocols(Collections.singletonList(Protocol.HTTP_1_1));
+//    builder.protocols(Collections.singletonList(Protocol.HTTP_1_1));
 
     // 设置超时时间
     builder.connectTimeout(config.connectTimeout(), TimeUnit.SECONDS);
     builder.writeTimeout(config.writeTimeout(), TimeUnit.SECONDS);
     builder.readTimeout(config.readTimeout(), TimeUnit.SECONDS);
+
     // 缓存
     if (config.shouldCache() && config.cache() != null) {
       builder.cache(config.cache());

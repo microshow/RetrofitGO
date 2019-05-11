@@ -22,11 +22,9 @@ public abstract class SimpleNetBoundResource<T> {
                         emitter.onNext(Resource.success(response));
                     },
                     e -> {  // 失败
-//                        RxHelper.handleError(e).subscribe(error -> {
-////              ResponseErrorHander.handleError(AppUtils.getContext(), error.getCode(), error.getMessage(), false);
-//                            emitter.onNext(Resource.<T>error(error.getCode(), error.getMessage(), null));
-//                        });
-                        emitter.onNext(Resource.<T>error(e.getMessage(), null));
+                        RxHelper.handleError(e).subscribe(error -> {
+                            emitter.onNext(Resource.<T>error(error.getCode(), error.getMessage(), null));
+                        });
                     });
         }, BackpressureStrategy.BUFFER);
     }

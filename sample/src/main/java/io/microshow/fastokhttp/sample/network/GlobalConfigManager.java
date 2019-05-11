@@ -3,9 +3,9 @@ package io.microshow.fastokhttp.sample.network;
 /**
  *
  */
-public class GlobalManager {
+public class GlobalConfigManager {
 
-    private static GlobalManager instance;
+    private static GlobalConfigManager instance;
 
     /**
      * 服务器时间
@@ -18,18 +18,18 @@ public class GlobalManager {
 
     private String apiDomain = "https://app.vvic.com";
 
-    private GlobalManager() {
+    private GlobalConfigManager() {
 
     }
 
     /**
      * 单例获取
      */
-    public static GlobalManager getInstance() {
+    public static GlobalConfigManager getInstance() {
         if (instance == null) {
-            synchronized (GlobalManager.class) {
+            synchronized (GlobalConfigManager.class) {
                 if (instance == null) {
-                    instance = new GlobalManager();
+                    instance = new GlobalConfigManager();
                 }
             }
         }

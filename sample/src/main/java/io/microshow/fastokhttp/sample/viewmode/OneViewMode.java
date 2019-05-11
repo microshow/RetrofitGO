@@ -6,10 +6,10 @@ import android.support.annotation.NonNull;
 
 import io.microshow.fastokhttp.sample.MovieModel;
 import io.microshow.fastokhttp.sample.ServerAPI;
-import io.microshow.fastokhttp.sample.network.GlobalManager;
+import io.microshow.fastokhttp.sample.network.GlobalConfigManager;
 import io.microshow.rxretrofit.RetrofitClient;
 import io.microshow.rxretrofit.internal.RxHelper;
-import io.microshow.fastokhttp.sample.network.SimpleNetBoundResource2;
+import io.microshow.fastokhttp.sample.network.CommonNetBoundResource;
 import io.microshow.rxretrofit.arch.Resource;
 import io.reactivex.Flowable;
 import io.reactivex.disposables.CompositeDisposable;
@@ -29,9 +29,9 @@ public class OneViewMode extends ViewModel {
     }
 
     public void loadData2 () {
-        ServerAPI serverAPI = RetrofitClient.getInstance().create(ServerAPI.class, GlobalManager.getInstance().getApiDomain());
+        ServerAPI serverAPI = RetrofitClient.getInstance().create(ServerAPI.class, GlobalConfigManager.getInstance().getApiDomain());
 
-        addDisposable(new SimpleNetBoundResource2<MovieModel>() {
+        addDisposable(new CommonNetBoundResource<MovieModel>() {
             @NonNull
             @Override
             protected Flowable fetchFromNet() {

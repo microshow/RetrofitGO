@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import io.microshow.rxretrofit.internal.ApiException;
-import io.microshow.rxretrofit.internal.BaseResponse;
-import io.microshow.rxretrofit.internal.ResponseState;
+import io.microshow.rxretrofit.internal.Response;
+import io.microshow.rxretrofit.internal.ErrorHelper;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 
@@ -39,16 +39,17 @@ final class CommonGsonResponseBodyConverter<T> implements Converter<ResponseBody
     }
 
     private void verify(String json) {
-        BaseResponse result = gson.fromJson(json, BaseResponse.class);
-        if (result.getCode() != ResponseState.SUCCESS) {
-            switch (result.getCode()) {
-                case ResponseState.SERVER_EXCEPTION:
-                    throw new ApiException(result.getCode(), result.getMessage());
-                case ResponseState.TOKEN_EXPIRE:
-                    throw new ApiException(result.getCode(), result.getMessage());
-                default:
-                    throw new ApiException(result.getCode(), result.getMessage());
-            }
+        Response result = gson.fromJson(json, Response.class);
+        if (result.getCode() != ErrorHelper.SUCCESS) {
+//            switch (result.getCode()) {
+//                case ErrorHelper.SERVER_EXCEPTION:
+//                    throw new ApiException(result.getCode(), result.getMessage());
+//                case ErrorHelper.TOKEN_EXPIRE:
+//                    throw new ApiException(result.getCode(), result.getMessage());
+//                default:
+//                    throw new ApiException(result.getCode(), result.getMessage());
+//            }
+            throw new ApiException(result.getCode(), result.getMessage());
         }
     }
 

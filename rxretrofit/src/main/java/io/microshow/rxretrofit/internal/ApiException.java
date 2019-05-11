@@ -1,6 +1,7 @@
 package io.microshow.rxretrofit.internal;
 
 /**
+ *  ApiException
  */
 public class ApiException extends RuntimeException {
 

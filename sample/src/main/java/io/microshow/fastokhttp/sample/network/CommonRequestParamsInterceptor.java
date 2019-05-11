@@ -15,9 +15,9 @@ public class CommonRequestParamsInterceptor extends RequestParamsInterceptor {
     public Map<String, String> getCommonParams() {
         Map<String, String> PARAMS = new ConcurrentHashMap<>();
         PARAMS.put("secret", JWTFactory.getSecret(
-                GlobalManager.getInstance().getServerTime(),
-                GlobalManager.getInstance().getJwtIss(),
-                GlobalManager.getInstance().getJwtSecret()));
+                GlobalConfigManager.getInstance().getServerTime(),
+                GlobalConfigManager.getInstance().getJwtIss(),
+                GlobalConfigManager.getInstance().getJwtSecret()));
         return PARAMS;
     }
 
