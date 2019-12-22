@@ -4,7 +4,7 @@
         <!--添加要绑定的数据-->
         <variable
             name="oneViewMode"
-            type="io.microshow.fastokhttp.sample.viewmode.OneViewMode"/>
+            type="io.microshow.retrofitgo.sample.viewmode.OneViewMode"/>
     </data>
 
     <LinearLayout
@@ -19,14 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dip"
-            android:text="请求数据"/>
-
-        <Button
-            android:id="@+id/test3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dip"
-            android:text="测试RxCache"/>
+            android:text="测试AppBar"/>
 
         <Button
             android:id="@+id/test2"
@@ -34,6 +27,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dip"
             android:text="测试AppBar"/>
+
+        <Button
+            android:id="@+id/test3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dip"
+            android:text="测试 NET RESUEST"/>
 
         <ScrollView
             android:layout_width="match_parent"

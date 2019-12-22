@@ -1,1 +1,1 @@
-include ':sample', ':rxretrofit'
+include ':sample', ':retrofitgo'
