@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     mBinding.result.setText("loading");
                     break;
                 case SUCCESS:
-                    mBinding.result.setText(resource.data.cateGoryList.get(0).dict_value);
+                    mBinding.result.setText(resource.data.items.get(0).title);
                     break;
             }
         });

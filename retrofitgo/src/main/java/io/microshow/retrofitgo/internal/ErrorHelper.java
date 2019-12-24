@@ -6,7 +6,7 @@ import io.microshow.retrofitgo.RetrofitClient;
 
 public final class ErrorHelper {
 
-  public static final int SUCCESS = 200;
+  public static final int SUCCESS = 0;
   public static final int UNKNOWN = 8001000;        //未知错误 如未知HOST(断网情况)
   public static final int PARSE_ERROR = 8001001;    //解析错误
   public static final int NETWORK_ERROR = 8001002;  //网络错误

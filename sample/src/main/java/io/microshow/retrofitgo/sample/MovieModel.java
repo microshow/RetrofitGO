@@ -6,10 +6,10 @@ import java.util.List;
  */
 public class MovieModel {
 
-    public List<CateGory> cateGoryList;
+    public List<Item> items;
 
-    public static class CateGory {
-        public String dict_value;
+    public static class Item {
+        public String title;
     }
 
 }

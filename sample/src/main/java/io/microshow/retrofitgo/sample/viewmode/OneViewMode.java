@@ -28,7 +28,7 @@ public class OneViewMode extends ViewModel {
     }
 
     public void loadMovieData() {
-        ServerAPI serverAPI = RetrofitClient.getInstance().create(ServerAPI.class, "https://douban.uieee.com/");
+        ServerAPI serverAPI = RetrofitClient.getInstance().create(ServerAPI.class, "https://36kr.com/");
 
         addDisposable(new SimpleNetBoundResource<MovieModel>() {
             @NonNull

@@ -9,7 +9,7 @@ import retrofit2.http.GET;
  */
 public interface ServerAPI {
 
-    @GET("v2/movie/in_theaters")
+    @GET("api/newsflash?per_page=5")
     Flowable<Response<MovieModel>> getMovie();
 
 }
