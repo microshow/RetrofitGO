@@ -4,6 +4,9 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import io.microshow.retrofitgo.internal.SimpleNetBoundResource;
 import io.microshow.retrofitgo.sample.MovieModel;
 import io.microshow.retrofitgo.sample.ServerAPI;
@@ -34,7 +37,9 @@ public class OneViewMode extends ViewModel {
             @NonNull
             @Override
             protected Flowable fetchFromNet() {
-                return serverAPI.getMovie().compose(RxHelper::handleResponse);
+                Map<String, String> params = new HashMap<>();
+                params.put("per_page","3");
+                return serverAPI.getMovie(params).compose(RxHelper::handleResponse);
             }
         }.getFlowable().subscribe(resource -> {
             data2.postValue(resource);

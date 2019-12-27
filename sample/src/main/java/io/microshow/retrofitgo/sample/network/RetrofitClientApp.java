@@ -3,6 +3,9 @@ package io.microshow.retrofitgo.sample.network;
 import android.app.Application;
 import android.util.Log;
 
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+
 import io.microshow.retrofitgo.RetrofitClient;
 import io.microshow.retrofitgo.RetrofitConfig;
 import io.microshow.retrofitgo.converter.CommonGsonConverterFactory;
@@ -22,9 +25,11 @@ public class RetrofitClientApp {
     public static void initDefaultRetrofitClient(Application application, boolean debug) {
         RetrofitConfig.Builder builder = new RetrofitConfig.Builder()
                 .addConverterFactory(CommonGsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
 //                .addInterceptor(new CommonRequestHeadersInterceptor())
 //                .addInterceptor(new CommonRequestParamsInterceptor());
+        .addInterceptor(new CacheInterceptor());
+
 
         if (debug) {
             // 添加日志拦截器
@@ -38,6 +43,10 @@ public class RetrofitClientApp {
             //日志拦截器需要放到其它拦截器后面，不然有些信息打印不出，比如请求头信息
             //OkHttp进行添加拦截器loggingInterceptor
             builder.addInterceptor(loggingInterceptor);
+
+            // 添加Stetho调试拦截器，并初始化
+            builder.addNetworkInterceptor(new StethoInterceptor());
+            Stetho.initializeWithDefaults(application);
         }
 
         RetrofitClient.init(application, builder.build());
