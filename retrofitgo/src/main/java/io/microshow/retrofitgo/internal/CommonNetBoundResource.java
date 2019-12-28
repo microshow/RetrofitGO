@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 
 import io.microshow.retrofitgo.arch.Resource;
 import io.microshow.retrofitgo.cache.CachePolicyMode;
+import io.microshow.retrofitgo.cache.CacheSpUtils;
+import io.microshow.retrofitgo.cache.ClassTypeReflect;
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.schedulers.Schedulers;
@@ -25,33 +27,38 @@ public abstract class CommonNetBoundResource<T> {
             //缓存的key,通过这个key查询缓存数据
             String cacheKey = getCacheKey();
 
-            if (mCachePolicyMode == CachePolicyMode.POLICY_ONLY_NETWORK) {
-                //只读网络
-
-
-            } else if (mCachePolicyMode == CachePolicyMode.POLICY_ONLY_CACHE) {
-                //只读缓存
-
-
-            } else if (mCachePolicyMode == CachePolicyMode.POLICY_NETWORK_ELSE_CACHE) {
-                //先查询网络数据，如果没有，再查询本地缓存
-
-
-            } else if (mCachePolicyMode == CachePolicyMode.POLICY_CACHE_AND_NETWORK) {
+            if (mCachePolicyMode == CachePolicyMode.POLICY_CACHE_AND_NETWORK) {
                 //先查询本地缓存,不管有没缓存,紧接着都会查询网络数据，此策略会回调两次响应
-
-
+                T cacheData = getCacheResult(cacheKey);
+                if (cacheData != null) {
+                    emitter.onNext(Resource.success(cacheData, true));
+                }
             }
 
             // 从网络加载数据
             fetchFromNet().subscribe(
                     response -> { // 成功
                         saveResult(response);
+                        if (mCachePolicyMode != CachePolicyMode.POLICY_ONLY_NETWORK) {
+                            //不是只读网络策略，都需要把数据缓存到本地
+                            CacheSpUtils.saveCacheData(cacheKey, response);
+                        }
                         emitter.onNext(Resource.success(response));
                     },
                     e -> {  // 失败
                         RxHelper.handleError(e).subscribe(error -> {
+
+                            if (mCachePolicyMode == CachePolicyMode.POLICY_NETWORK_ELSE_CACHE) {
+                                //网络加载失败在读缓存数据
+                                T cacheData = getCacheResult(cacheKey);
+                                if (cacheData != null) {
+                                    emitter.onNext(Resource.success(cacheData, true));
+                                    return;
+                                }
+                            }
+
                             emitter.onNext(Resource.<T>error(error.getCode(), error.getMessage(), null));
+
                         });
                     });
         }, BackpressureStrategy.BUFFER);
@@ -63,8 +70,13 @@ public abstract class CommonNetBoundResource<T> {
     @NonNull
     protected abstract Flowable<T> fetchFromNet();
 
-    protected void saveResult(T item) {
+    private void saveResult(T item) {
 
+    }
+
+    private <T> T getCacheResult(String cacheKey) {
+        T cacheData = CacheSpUtils.getCacheData(cacheKey, ClassTypeReflect.getModelClazz(getClass()));
+        return cacheData;
     }
 
     //获取缓存的key

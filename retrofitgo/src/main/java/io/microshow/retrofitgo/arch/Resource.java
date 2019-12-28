@@ -17,6 +17,10 @@ public class Resource<T> {
     public final int code;
     @Nullable
     public final String message;
+    /**
+     * 是否是缓存数据
+     */
+    public boolean isCache;
 
     private Resource(@NonNull Status status, @Nullable T data, int code, @Nullable String message) {
         this.status = status;
@@ -25,8 +29,17 @@ public class Resource<T> {
         this.message = message;
     }
 
+    private Resource(@NonNull Status status, @Nullable T data, int code, @Nullable String message, boolean isCache) {
+        this(status, data, code, message);
+        this.isCache = isCache;
+    }
+
     public static <T> Resource<T> success(T data) {
         return new Resource<>(SUCCESS, data, SUCCESS_CODE, null);
+    }
+
+    public static <T> Resource<T> success(T data, boolean isCache) {
+        return new Resource<>(SUCCESS, data, SUCCESS_CODE, null, isCache);
     }
 
     public static <T> Resource<T> error(String msg, @Nullable T data) {

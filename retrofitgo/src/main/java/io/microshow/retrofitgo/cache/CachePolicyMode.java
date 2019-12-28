@@ -12,11 +12,6 @@ public enum CachePolicyMode {
     POLICY_ONLY_NETWORK,
 
     /**
-     * 只查询缓存数据
-     */
-    POLICY_ONLY_CACHE,
-
-    /**
      * 先查询网络数据，如果没有，再查询本地缓存
      */
     POLICY_NETWORK_ELSE_CACHE,

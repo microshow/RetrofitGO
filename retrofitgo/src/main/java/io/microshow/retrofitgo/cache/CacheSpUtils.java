@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
+
+import java.lang.reflect.Type;
+
 import io.microshow.retrofitgo.RetrofitClient;
 
 /**
@@ -19,17 +23,22 @@ public class CacheSpUtils {
                 .getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
 
-    public static void saveCacheData(String cacheKey, String datas) {
-        if (!TextUtils.isEmpty(cacheKey) && !TextUtils.isEmpty(datas)) {
+    public static <T> void saveCacheData(String cacheKey, T model) {
+        if (!TextUtils.isEmpty(cacheKey) && model != null) {
             SharedPreferences mSharedPreferences = getSharedPreferences();
             SharedPreferences.Editor edit = mSharedPreferences.edit();
-            edit.putString(cacheKey, datas);
+            edit.putString(cacheKey, new Gson().toJson(model));
             edit.commit();
         }
     }
 
-    public static String getCacheData(String cacheKey) {
-        return getSharedPreferences().getString(cacheKey, null);
+    public static <T> T getCacheData(String cacheKey, Type typeOfT) {
+        if (!TextUtils.isEmpty(cacheKey)) {
+            String data = getSharedPreferences().getString(cacheKey, null);
+            return !TextUtils.isEmpty(data) ? new Gson().fromJson(data, typeOfT) : null;
+        } else {
+            return null;
+        }
     }
 
 }

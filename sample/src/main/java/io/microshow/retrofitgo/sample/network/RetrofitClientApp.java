@@ -25,10 +25,9 @@ public class RetrofitClientApp {
     public static void initDefaultRetrofitClient(Application application, boolean debug) {
         RetrofitConfig.Builder builder = new RetrofitConfig.Builder()
                 .addConverterFactory(CommonGsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
 //                .addInterceptor(new CommonRequestHeadersInterceptor())
 //                .addInterceptor(new CommonRequestParamsInterceptor());
-        .addInterceptor(new CacheInterceptor());
 
 
         if (debug) {
