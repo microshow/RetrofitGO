@@ -1,5 +1,6 @@
 package io.microshow.retrofitgo.internal;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 
 import io.microshow.retrofitgo.arch.Resource;
@@ -11,6 +12,7 @@ public abstract class SimpleNetBoundResource<T> {
 
     private Flowable<Resource<T>> flowable;
 
+    @SuppressLint("CheckResult")
     public SimpleNetBoundResource() {
         flowable = Flowable.create(emitter -> {
             // 加载中

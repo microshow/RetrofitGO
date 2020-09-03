@@ -3,6 +3,7 @@ package io.microshow.retrofitgo.sample;
 import java.util.List;
 
 /**
+ *
  */
 public class MovieModel {
 

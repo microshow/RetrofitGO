@@ -1,5 +1,6 @@
 package io.microshow.retrofitgo.internal;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 
 import io.microshow.retrofitgo.arch.Resource;
@@ -16,6 +17,7 @@ public abstract class CommonNetBoundResource<T> {
 
     private CachePolicyMode mCachePolicyMode;
 
+    @SuppressLint("CheckResult")
     public CommonNetBoundResource(CachePolicyMode cachePolicyMode) {
 
         mCachePolicyMode = cachePolicyMode;

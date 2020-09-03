@@ -11,7 +11,7 @@ import retrofit2.http.QueryMap;
 /**
  * Created by Super on 2018/12/26.
  */
-public interface OneWebService{
+public interface OneWebService {
 
     @GET("api/newsflash")
     Flowable<Response<MovieModel>> getMovie(@QueryMap Map<String, String> params);

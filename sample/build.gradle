@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion compileSdkValue
     defaultConfig {
-        applicationId "io.microshow.fastokhttp.sample"
+        applicationId "io.microshow.retrofitgo.sample"
         minSdkVersion minSdkValue
         targetSdkVersion targetSdkValue
         versionCode versionCodeValue

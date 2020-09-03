@@ -1,6 +1,7 @@
 package io.microshow.retrofitgo.internal;
 
 /**
+ *
  */
 public class Response<T> {
 

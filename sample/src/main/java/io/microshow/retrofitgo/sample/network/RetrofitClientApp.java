@@ -19,6 +19,7 @@ public class RetrofitClientApp {
 
     /**
      * 初始化默认的RetrofitClient
+     *
      * @param application
      * @param debug
      */
@@ -48,7 +49,8 @@ public class RetrofitClientApp {
             Stetho.initializeWithDefaults(application);
         }
 
-        RetrofitClient.init(application, builder.build());
+        RetrofitClient.init(application, builder.build())
+                .setRequestSuccessCode(0);
     }
 
 }

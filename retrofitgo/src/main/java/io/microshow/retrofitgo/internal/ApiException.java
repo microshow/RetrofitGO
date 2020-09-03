@@ -1,7 +1,7 @@
 package io.microshow.retrofitgo.internal;
 
 /**
- *  ApiException
+ * ApiException
  */
 public class ApiException extends RuntimeException {
 
