@@ -1,9 +1,11 @@
 package io.microshow.retrofitgo.internal;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public class Response<T> {
+public class Response<T> implements Serializable {
 
     private int code;
     private String message;

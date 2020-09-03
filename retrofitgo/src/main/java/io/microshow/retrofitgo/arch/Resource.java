@@ -3,12 +3,14 @@ package io.microshow.retrofitgo.arch;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.io.Serializable;
+
 import static io.microshow.retrofitgo.arch.Resource.Status.ERROR;
 import static io.microshow.retrofitgo.arch.Resource.Status.LOADING;
 import static io.microshow.retrofitgo.arch.Resource.Status.SUCCESS;
 
 
-public class Resource<T> {
+public class Resource<T> implements Serializable {
 
     @NonNull
     public final Status status;
