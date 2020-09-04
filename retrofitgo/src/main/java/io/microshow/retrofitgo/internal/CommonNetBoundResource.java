@@ -34,6 +34,7 @@ public abstract class CommonNetBoundResource<T> {
                 T cacheData = getCacheResult(cacheKey);
                 if (cacheData != null) {
                     emitter.onNext(Resource.success(cacheData, true));
+                    Thread.sleep(100);
                 }
             }
 

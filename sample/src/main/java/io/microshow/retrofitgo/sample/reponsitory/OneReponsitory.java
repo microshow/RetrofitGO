@@ -27,7 +27,7 @@ public class OneReponsitory {
         String mCacheKey = this.getClass().getName()
                 + "." + Thread.currentThread().getStackTrace()[2].getMethodName()
                 + "." + params.hashCode();
-        return new CommonNetBoundResource<MovieModel>(CachePolicyMode.POLICY_NETWORK_ELSE_CACHE) {
+        return new CommonNetBoundResource<MovieModel>(CachePolicyMode.POLICY_CACHE_AND_NETWORK) {
             @NonNull
             @Override
             protected Flowable fetchFromNet() {

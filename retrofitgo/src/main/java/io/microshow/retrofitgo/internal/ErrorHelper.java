@@ -62,7 +62,7 @@ public final class ErrorHelper {
     }
 
     public static Error apiError(int code, String message) {
-        return new Error(code, code + ": " + message);
+        return new Error(code, message);
     }
 
     private static String getString(@StringRes int resId) {
