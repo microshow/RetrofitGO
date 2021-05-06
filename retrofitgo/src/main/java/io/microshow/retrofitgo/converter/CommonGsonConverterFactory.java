@@ -20,7 +20,7 @@ import retrofit2.Retrofit;
  * you must {@linkplain Retrofit.Builder#addConverterFactory(Converter.Factory) add this instance}
  * last to allow the other converters a chance to see their types.
  */
-public final class CommonGsonConverterFactory extends Converter.Factory {
+public class CommonGsonConverterFactory extends Converter.Factory {
     /**
      * Create an instance using a default {@link Gson} instance for conversion. Encoding to JSON and
      * decoding from JSON (when no charset is specified by a header) will use UTF-8.

@@ -16,11 +16,11 @@ import retrofit2.Converter;
 /**
  *
  */
-final class CommonGsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
+public class CommonGsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
     private final Gson gson;
     private final TypeAdapter<T> adapter;
 
-    CommonGsonResponseBodyConverter(Gson gson, TypeAdapter<T> adapter) {
+    public CommonGsonResponseBodyConverter(Gson gson, TypeAdapter<T> adapter) {
         this.gson = gson;
         this.adapter = adapter;
     }
@@ -38,7 +38,7 @@ final class CommonGsonResponseBodyConverter<T> implements Converter<ResponseBody
         }
     }
 
-    private void verify(String json) {
+    public void verify(String json) {
         Response result = gson.fromJson(json, Response.class);
         if (result.getCode() != ErrorHelper.SUCCESS) {
 //            switch (result.getCode()) {

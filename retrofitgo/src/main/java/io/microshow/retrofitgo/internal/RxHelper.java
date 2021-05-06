@@ -23,7 +23,7 @@ import retrofit2.HttpException;
 /**
  * RxHelper
  */
-public final class RxHelper {
+public class RxHelper {
 
     public static <T> FlowableTransformer<Response<T>, T> handleResponse() {
         return RxHelper::handleResponse;
