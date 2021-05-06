@@ -22,8 +22,8 @@ public class CommonGsonRequestBodyConverter<T> implements Converter<T, RequestBo
     private static final MediaType MEDIA_TYPE = MediaType.get("application/json; charset=UTF-8");
     private static final Charset UTF_8 = Charset.forName("UTF-8");
 
-    private final Gson gson;
-    private final TypeAdapter<T> adapter;
+    public Gson gson;
+    public TypeAdapter<T> adapter;
 
     public CommonGsonRequestBodyConverter(Gson gson, TypeAdapter<T> adapter) {
         this.gson = gson;

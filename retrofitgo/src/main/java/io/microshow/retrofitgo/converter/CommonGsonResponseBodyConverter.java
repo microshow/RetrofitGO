@@ -17,8 +17,8 @@ import retrofit2.Converter;
  *
  */
 public class CommonGsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
-    private final Gson gson;
-    private final TypeAdapter<T> adapter;
+    public Gson gson;
+    public TypeAdapter<T> adapter;
 
     public CommonGsonResponseBodyConverter(Gson gson, TypeAdapter<T> adapter) {
         this.gson = gson;

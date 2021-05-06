@@ -39,9 +39,9 @@ public class CommonGsonConverterFactory extends Converter.Factory {
         return new CommonGsonConverterFactory(gson);
     }
 
-    private final Gson gson;
+    public Gson gson;
 
-    private CommonGsonConverterFactory(Gson gson) {
+    public CommonGsonConverterFactory(Gson gson) {
         this.gson = gson;
     }
 
