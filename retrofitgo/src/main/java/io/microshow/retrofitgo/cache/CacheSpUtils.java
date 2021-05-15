@@ -3,6 +3,7 @@ package io.microshow.retrofitgo.cache;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -27,14 +28,17 @@ public class CacheSpUtils {
         if (!TextUtils.isEmpty(cacheKey) && model != null) {
             SharedPreferences mSharedPreferences = getSharedPreferences();
             SharedPreferences.Editor edit = mSharedPreferences.edit();
-            edit.putString(cacheKey, new Gson().toJson(model));
+            String json = new Gson().toJson(model);
+            edit.putString(cacheKey, json);
             edit.commit();
+            Log.e("CacheSpUtils","saveCacheData cacheKey="+cacheKey+";json="+json);
         }
     }
 
     public static <T> T getCacheData(String cacheKey, Type typeOfT) {
         if (!TextUtils.isEmpty(cacheKey)) {
             String data = getSharedPreferences().getString(cacheKey, null);
+            Log.e("CacheSpUtils","getCacheData cacheKey="+cacheKey+";json="+data);
             return !TextUtils.isEmpty(data) ? new Gson().fromJson(data, typeOfT) : null;
         } else {
             return null;
