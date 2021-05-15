@@ -6,8 +6,10 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.List;
 
 import io.microshow.retrofitgo.RetrofitClient;
 
@@ -39,21 +41,21 @@ public class CacheSpUtils {
         }
     }
 
-    public static <T> T getCacheData(String cacheKey, Type typeOfT) {
-        try {
-            if (!TextUtils.isEmpty(cacheKey)) {
-                String data = getSharedPreferences().getString(cacheKey, null);
-                Log.e("CacheSpUtils","getCacheData cacheKey="+cacheKey+";json="+data);
-                return !TextUtils.isEmpty(data) ? new Gson().fromJson(data, typeOfT) : null;
-            } else {
-                return null;
-            }
-        } catch (Exception e) {
-            return null;
-        }
-    }
+//    public static <T> T getCacheData(String cacheKey, Type typeOfT) {
+//        try {
+//            if (!TextUtils.isEmpty(cacheKey)) {
+//                String data = getSharedPreferences().getString(cacheKey, null);
+//                Log.e("CacheSpUtils","getCacheData cacheKey="+cacheKey+";json="+data);
+//                return !TextUtils.isEmpty(data) ? new Gson().fromJson(data, typeOfT) : null;
+//            } else {
+//                return null;
+//            }
+//        } catch (Exception e) {
+//            return null;
+//        }
+//    }
 
-    public static <T> T getCacheData(String cacheKey, Type typeOfT, Type typeOfList) {
+    public static <T> T getCacheData(String cacheKey, Type typeOfT) {
         try {
             if (!TextUtils.isEmpty(cacheKey)) {
                 String data = getSharedPreferences().getString(cacheKey, null);
@@ -61,7 +63,7 @@ public class CacheSpUtils {
                 if (data != null && !TextUtils.isEmpty(data)) {
                     if (data.startsWith("[") && data.endsWith("]")) {//json数组
                         Log.e("CacheSpUtils","getCacheData json array");
-                        return new Gson().fromJson(data, typeOfList);
+                        return new Gson().fromJson(data, new TypeToken<T>(){}.getType());
                     } else {
                         Log.e("CacheSpUtils","getCacheData json obj");
                         return new Gson().fromJson(data, typeOfT);
