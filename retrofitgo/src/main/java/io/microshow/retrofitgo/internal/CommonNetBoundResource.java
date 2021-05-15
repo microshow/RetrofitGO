@@ -3,6 +3,10 @@ package io.microshow.retrofitgo.internal;
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+
 import io.microshow.retrofitgo.arch.Resource;
 import io.microshow.retrofitgo.cache.CachePolicyMode;
 import io.microshow.retrofitgo.cache.CacheSpUtils;
@@ -78,7 +82,8 @@ public abstract class CommonNetBoundResource<T> {
     }
 
     private <T> T getCacheResult(String cacheKey) {
-        T cacheData = CacheSpUtils.getCacheData(cacheKey, ClassTypeReflect.getModelClazz(getClass()));
+        Type type = new TypeToken<T>(){}.getType();
+        T cacheData = CacheSpUtils.getCacheData(cacheKey, type);
         return cacheData;
     }
 
