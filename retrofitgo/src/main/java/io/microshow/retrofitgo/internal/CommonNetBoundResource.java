@@ -82,9 +82,7 @@ public abstract class CommonNetBoundResource<T> {
     }
 
     private <T> T getCacheResult(String cacheKey) {
-        Type type = new TypeToken<T>(){}.getType();
-        T cacheData = CacheSpUtils.getCacheData(cacheKey, type);
-        return cacheData;
+        return CacheSpUtils.getCacheData(cacheKey, ClassTypeReflect.getModelClazz(getClass()), new TypeToken<T>(){}.getType());
     }
 
     //获取缓存的key

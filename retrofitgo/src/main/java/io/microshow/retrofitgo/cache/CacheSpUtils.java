@@ -45,4 +45,22 @@ public class CacheSpUtils {
         }
     }
 
+    public static <T> T getCacheData(String cacheKey, Type typeOfT, Type typeOfList) {
+        if (!TextUtils.isEmpty(cacheKey)) {
+            String data = getSharedPreferences().getString(cacheKey, null);
+            Log.e("CacheSpUtils","getCacheData cacheKey="+cacheKey+";json="+data);
+            if (data != null && !TextUtils.isEmpty(data)) {
+                if (data.startsWith("[") && data.endsWith("]")) {//json数组
+                    return new Gson().fromJson(data, typeOfList);
+                } else {
+                    return new Gson().fromJson(data, typeOfT);
+                }
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
 }
