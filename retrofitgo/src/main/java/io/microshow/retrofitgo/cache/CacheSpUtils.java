@@ -60,8 +60,10 @@ public class CacheSpUtils {
                 Log.e("CacheSpUtils","getCacheData cacheKey="+cacheKey+";json="+data);
                 if (data != null && !TextUtils.isEmpty(data)) {
                     if (data.startsWith("[") && data.endsWith("]")) {//json数组
+                        Log.e("CacheSpUtils","getCacheData json array");
                         return new Gson().fromJson(data, typeOfList);
                     } else {
+                        Log.e("CacheSpUtils","getCacheData json obj");
                         return new Gson().fromJson(data, typeOfT);
                     }
                 } else {
