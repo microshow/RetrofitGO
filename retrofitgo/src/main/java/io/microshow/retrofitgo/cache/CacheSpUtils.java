@@ -25,40 +25,52 @@ public class CacheSpUtils {
     }
 
     public static <T> void saveCacheData(String cacheKey, T model) {
-        if (!TextUtils.isEmpty(cacheKey) && model != null) {
-            SharedPreferences mSharedPreferences = getSharedPreferences();
-            SharedPreferences.Editor edit = mSharedPreferences.edit();
-            String json = new Gson().toJson(model);
-            edit.putString(cacheKey, json);
-            edit.commit();
-            Log.e("CacheSpUtils","saveCacheData cacheKey="+cacheKey+";json="+json);
+        try {
+            if (!TextUtils.isEmpty(cacheKey) && model != null) {
+                SharedPreferences mSharedPreferences = getSharedPreferences();
+                SharedPreferences.Editor edit = mSharedPreferences.edit();
+                String json = new Gson().toJson(model);
+                edit.putString(cacheKey, json);
+                edit.apply();
+                Log.e("CacheSpUtils","saveCacheData cacheKey="+cacheKey+";json="+json);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     public static <T> T getCacheData(String cacheKey, Type typeOfT) {
-        if (!TextUtils.isEmpty(cacheKey)) {
-            String data = getSharedPreferences().getString(cacheKey, null);
-            Log.e("CacheSpUtils","getCacheData cacheKey="+cacheKey+";json="+data);
-            return !TextUtils.isEmpty(data) ? new Gson().fromJson(data, typeOfT) : null;
-        } else {
+        try {
+            if (!TextUtils.isEmpty(cacheKey)) {
+                String data = getSharedPreferences().getString(cacheKey, null);
+                Log.e("CacheSpUtils","getCacheData cacheKey="+cacheKey+";json="+data);
+                return !TextUtils.isEmpty(data) ? new Gson().fromJson(data, typeOfT) : null;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
             return null;
         }
     }
 
     public static <T> T getCacheData(String cacheKey, Type typeOfT, Type typeOfList) {
-        if (!TextUtils.isEmpty(cacheKey)) {
-            String data = getSharedPreferences().getString(cacheKey, null);
-            Log.e("CacheSpUtils","getCacheData cacheKey="+cacheKey+";json="+data);
-            if (data != null && !TextUtils.isEmpty(data)) {
-                if (data.startsWith("[") && data.endsWith("]")) {//json数组
-                    return new Gson().fromJson(data, typeOfList);
+        try {
+            if (!TextUtils.isEmpty(cacheKey)) {
+                String data = getSharedPreferences().getString(cacheKey, null);
+                Log.e("CacheSpUtils","getCacheData cacheKey="+cacheKey+";json="+data);
+                if (data != null && !TextUtils.isEmpty(data)) {
+                    if (data.startsWith("[") && data.endsWith("]")) {//json数组
+                        return new Gson().fromJson(data, typeOfList);
+                    } else {
+                        return new Gson().fromJson(data, typeOfT);
+                    }
                 } else {
-                    return new Gson().fromJson(data, typeOfT);
+                    return null;
                 }
             } else {
                 return null;
             }
-        } else {
+        } catch (Exception e) {
             return null;
         }
     }
